@@ -17,25 +17,25 @@ public class BallControl : MonoBehaviour
     void LaunchBall()
     {
         Vector3 launchDirection = new Vector3(Random.Range(-2f, 4f), 0, Random.Range(-0f, 4f)).normalized;
-        rb.velocity = launchDirection * speed;
+        rb.linearVelocity = launchDirection * speed;
     }
 
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Border"))
         {
-            Vector3 reflectDir = Vector3.Reflect(rb.velocity, collision.contacts[0].normal).normalized;
-            rb.velocity = speed * reflectDir;
+            Vector3 reflectDir = Vector3.Reflect(rb.linearVelocity, collision.contacts[0].normal).normalized;
+            rb.linearVelocity = speed * reflectDir;
         }
         if (collision.gameObject.CompareTag("Player"))
         {
-            Vector3 reflectDir = Vector3.Reflect(rb.velocity, collision.contacts[0].normal).normalized;
-            rb.velocity = speed * reflectDir;
+            Vector3 reflectDir = Vector3.Reflect(rb.linearVelocity, collision.contacts[0].normal).normalized;
+            rb.linearVelocity = speed * reflectDir;
         }
         if (collision.gameObject.CompareTag("Block"))
         {
-            Vector3 reflectDir = Vector3.Reflect(rb.velocity, collision.contacts[0].normal).normalized;
-            rb.velocity = speed * reflectDir;
+            Vector3 reflectDir = Vector3.Reflect(rb.linearVelocity, collision.contacts[0].normal).normalized;
+            rb.linearVelocity = speed * reflectDir;
             Destroy(collision.gameObject, 0.5f);
         }
 
